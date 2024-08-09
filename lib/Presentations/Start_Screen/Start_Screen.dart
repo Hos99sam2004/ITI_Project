@@ -82,23 +82,27 @@ class _StartScreenState extends State<StartScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: CurvedNavigationBar(
-        items: <Widget>[
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.home, size: 30),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.category, size: 30),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.food_bank, size: 30),
-          ),
-        ],
-        onTap: (index) {},
-      ),
+      bottomNavigationBar: Nav(),
+    );
+  }
+
+  CurvedNavigationBar Nav() {
+    return CurvedNavigationBar(
+      items: <Widget>[
+        IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.home, size: 30),
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.category, size: 30),
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.food_bank, size: 30),
+        ),
+      ],
+      onTap: (index) {},
     );
   }
 
