@@ -1,171 +1,210 @@
+// import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+// import 'package:hos/Presentations/Rigestars/Sign_Up.dart';
+// import 'package:hos/Presentations/Rigestars/Login.dart';
+// import 'package:hos/Presentations/Rigestars/Login.dart';
+import 'package:hos/Presentations/Rigestars/cubit/user_cubit.dart';
+import 'package:hos/Presentations/Rigestars/cubit/widgets/Custom.dart';
+import 'package:hos/Presentations/Start_Screen/Start_Screen.dart';
 
-
-class Login extends StatefulWidget {
-  const Login({super.key});
-
-  @override
-  State<Login> createState() => _homepageState();
-}
-
-class _homepageState extends State<Login> {
+// ignore: must_be_immutable
+class Login extends StatelessWidget {
+  Login({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SizedBox(
-        height: double.infinity,
-        width: double.infinity,
-        child: SingleChildScrollView(
-          child: Stack(
-            children: [
-              Positioned(
-                child: Image.asset(
-                  "assets/images/main_top.png",
-                  height: 200,
-                ),
-              ),
-              Positioned(
-                bottom: 0,
-                right: 0,
-                child: Image.asset(
-                  "assets/images/login_bottom.png",
-                  width: 200,
-                ),
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: Column(
-                  
-                  crossAxisAlignment: CrossAxisAlignment.center,
+    final cubit = context.read<UserCubit>();
+
+    return SafeArea(
+      child: Scaffold(
+        body: GestureDetector(
+          onTap: FocusScope.of(context).unfocus,
+          child: BlocListener<UserCubit, UserState>(
+            listener: (context, state) {
+              if (state is UserloginSucess) {
+                Get.snackbar("Success", "Success",
+                    backgroundColor: Colors.green);
+                Get.offAll(StartScreen());
+              }
+              if (state is UserloginError) {
+                Get.snackbar(
+                  "Error",
+                  state.error.toString(),
+                  colorText: Colors.white,
+                  backgroundColor: Colors.red,
+                );
+              }
+            },
+            child: SizedBox(
+              height: double.infinity,
+              width: double.infinity,
+              child: SingleChildScrollView(
+                child: Stack(
                   children: [
-                    SizedBox(
-                      height: 100,
+                    Positioned(
+                      child: Image.asset(
+                        "assets/images/main_top.png",
+                        height: 200,
+                      ),
                     ),
-                    Text(
-                      "Login",
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue[900],
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Image.asset(
+                        "assets/images/login_bottom.png",
+                        width: 200,
                       ),
                     ),
                     SizedBox(
-                      height: 30,
-                    ),
-                    Image.asset(
-                      "assets/images/Login.png",
-                      width: 200,
-                      height: 300,
-                      fit: BoxFit.cover,
-                      alignment: Alignment.center,
-                    ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    Container(
-                      width: 296,
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      decoration: BoxDecoration(
-                          color: Colors.purple[100],
-                          borderRadius: BorderRadius.circular(66)),
-                      child: TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Your Email : ",
-                          hintStyle: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue[900],
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 40,
                           ),
-                          icon: Icon(
-                            Icons.person,
-                            size: 30,
-                            color: Colors.blue[900],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Container(
-                      width: 296,
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      decoration: BoxDecoration(
-                          color: Colors.purple[100],
-                          borderRadius: BorderRadius.circular(66)),
-                      child: TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Password : ",
-                          hintStyle: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.blue[900],
-                          ),
-                          suffixIcon: Icon(
-                            Icons.visibility,
-                            size: 30,
-                            color: Colors.blue[900],
-                          ),
-                          icon: Icon(
-                            size: 30,
-                            Icons.lock,
-                            color: Colors.blue[900],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.purple[600],
-                          fixedSize: Size(296, 25),
-                        ),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/start_screen');
-                        },
-                        child: Text(
-                          "Login",
-                          style: TextStyle(
+                          Text(
+                            "Login",
+                            style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        )),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Don't have an account?",
-                          style: TextStyle(
-                            fontSize: 17,
+                              color: Colors.blue[900],
+                            ),
                           ),
-                        ),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/ForgetPassword');
+                          SizedBox(
+                            height: 30,
+                          ),
+                          SvgPicture.asset(
+                            "assets/icons/login.svg",
+                            width: 200,
+                            height: 300,
+                            fit: BoxFit.cover,
+                            alignment: Alignment.center,
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          CustomTextfield(
+                            text: "Email",
+                            controller: cubit.loginEmail,
+                            validator: (value) {
+                              if (!value!.isEmail) {
+                                return "Please enter a valid email";
+                              }
+                              return null;
                             },
-                            child: Text(
-                              "Forgot Password?",
-                              style: TextStyle(
-                                  color: Colors.blue[900],
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            )),
-                      ],
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          CustomTextfield(
+                            text: "Password",
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Please enter a valid password";
+                              }
+                              return null;
+                            },
+                            isPassword: true,
+                            controller: cubit.loginpassword,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              cubit.login(
+                                  email: cubit.loginEmail.text,
+                                  password: cubit.loginpassword.text);
+                            },
+                            child: BlocBuilder<UserCubit, UserState>(
+                              builder: (context, state) {
+                                if (state is UserloginLooding) {
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                } else {
+                                  return Container(
+                                    height: 45,
+                                    width: 299,
+                                    decoration: BoxDecoration(
+                                        color: Colors.indigo,
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    child: Center(
+                                      child: Text("Login",
+                                          style: TextStyle(
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          )),
+                                    ),
+                                  );
+                                }
+                              },
+                            ),
+                          ),
+
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Don't have an account?",
+                                style: TextStyle(
+                                  fontSize: 17,
+                                ),
+                              ),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/sign_up');
+                                  },
+                                  child: Text(
+                                    "Sign_up?",
+                                    style: TextStyle(
+                                        color: Colors.blue[900],
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                            ],
+                          ),
+
+                          ///
+                          ///
+                          ///
+
+                          Text(
+                            "OR",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          ),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/ForgetPassword');
+                              },
+                              child: Text(
+                                "Forget_Password?",
+                                style: TextStyle(
+                                    color: Colors.blue[900],
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
-            ],
+            ),
           ),
         ),
       ),

@@ -1,6 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:hos/Presentations/Pages/Catageores.dart';
+import 'package:hos/Presentations/Pages/Foods.dart';
 import 'package:hos/Presentations/Start_Screen/Lists.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -88,21 +92,39 @@ class _StartScreenState extends State<StartScreen> {
 
   CurvedNavigationBar Nav() {
     return CurvedNavigationBar(
+      color: Colors.green.shade100,
       items: <Widget>[
-        IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.home, size: 30),
+        Icon(
+          Icons.home,
+          size: 30,
+          color: Colors.pink,
         ),
-        IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.category, size: 30),
+        Icon(
+          Icons.category,
+          size: 30,
+          color: Colors.pink,
         ),
-        IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.food_bank, size: 30),
+        Icon(
+          Icons.food_bank,
+          size: 30,
+          color: Colors.pink,
         ),
       ],
-      onTap: (index) {},
+      onTap: (index) {
+        if (index == 0) {
+          new Future.delayed(Duration(milliseconds: 40), () {
+            Get.to(StartScreen());
+          });
+        } else if (index == 1) {
+          new Future.delayed(Duration(milliseconds: 50), () {
+            Get.to(Catageores());
+          });
+        } else {
+          new Future.delayed(Duration(milliseconds: 40), () {
+            Get.to(Foods());
+          });
+        }
+      },
     );
   }
 

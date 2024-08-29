@@ -46,7 +46,7 @@ class _Onbording3State extends State<Onbording3> {
               Spacer(),
               InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, "/start_screen");
+                  Navigator.pushNamed(context, "Welcome");
                 },
                 child: Container(
                   height: 100,

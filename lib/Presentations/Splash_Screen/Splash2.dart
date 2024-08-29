@@ -12,7 +12,7 @@ class Splash2 extends StatefulWidget {
 class _State extends State<Splash2> {
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 1), () {
+    Timer(Duration(seconds: 3), () {
       Navigator.of(context).pushReplacementNamed('/onbording1');
     });
   }
@@ -28,12 +28,10 @@ class _State extends State<Splash2> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
-                // height: 400,
                 width: 150,
                 'assets/images/Frame 5.png',
                 fit: BoxFit.cover,
-                // color: Colors.greenAccent,
-              ),
+                ),
             ],
           ),
         ),
